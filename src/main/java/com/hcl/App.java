@@ -26,7 +26,8 @@ public class App {
 
 		// creates an object of Scanner
 		Scanner input = new Scanner(System.in);
-		while (true) {
+		boolean a=true;
+		while (a) {
 			int sum = 0, subtract = 0, product = 0, divide = 0;
 
 			System.out.println("Enter your operator");
@@ -64,7 +65,13 @@ public class App {
 				System.out.println("Wrong Entry");
 				break;
 			}
+			System.out.println("Do you want to continue (y/n)");
+			input.nextLine();
+			String b = input.nextLine();
+			a = b.equals("y");
+			System.out.println(a);
 		}
+		System.out.println("program terminated");
 	}
 
 }
