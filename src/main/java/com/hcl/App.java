@@ -17,33 +17,54 @@ import java.util.Scanner;
  * 
  * the 2 key requirement is it should have a basic banner and it should also be
  * menu driven
- *  
+ * 
  */
 public class App {
 	public static void main(String[] args) {
-		//Poor mans banner
+		// Poor mans banner
 		System.out.println("Hello World! I am a great calculator :-) ;-) ");
-		
+
 		// creates an object of Scanner
-	    Scanner input = new Scanner(System.in);
+		Scanner input = new Scanner(System.in);
+		while (true) {
+			int sum = 0, subtract = 0, product = 0, divide = 0;
 
-	    System.out.print("Enter first number: ");
+			System.out.println("Enter your operator");
+			String operator = input.next();
 
-	    // takes 1st number
-	    int firstNumber = input.nextInt();
+			System.out.print("Enter first number: ");
 
-	    // prints the name
-	    System.out.println("Enter second number: ");
-	    
-	    // takes 2st number
-	    int secondNumber = input.nextInt();
-	    
-	    //operation add only
-	    int sum = firstNumber + secondNumber;
-	    
-	    System.out.printf("Sum of %d and %d = %d", firstNumber, secondNumber, sum);
+			// takes 1st number
+			int firstNumber = input.nextInt();
 
-	    // closes the scanner
-	    input.close();
+			// prints the name
+			System.out.println("Enter second number: ");
+
+			// takes 2st number
+			int secondNumber = input.nextInt();
+
+			switch (operator) {
+			case "+":
+				sum = firstNumber + secondNumber;
+				System.out.printf("sum = %d\n", sum);
+				break;
+			case "-":
+				subtract = firstNumber - secondNumber;
+				System.out.printf("substract = %d\n", subtract);
+				break;
+			case "*":
+				product = firstNumber * secondNumber;
+				System.out.printf("product = %d\n", product);
+				break;
+			case "/":
+				divide = firstNumber / secondNumber;
+				System.out.printf("divide = %d\n", divide);
+				break;
+			default:
+				System.out.println("Wrong Entry");
+				break;
+			}
+		}
 	}
+
 }
