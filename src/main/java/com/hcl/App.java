@@ -1,5 +1,8 @@
 package com.hcl;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -21,14 +24,31 @@ import java.util.Scanner;
  */
 public class App {
 	public static void main(String[] args) {
+		
+		String fileName = "file\\view.txt";
+		File file = new File(fileName);
+
+		try {
+			boolean status = file.createNewFile();
+			if (status) {
+				System.out.println("Output file created");
+			}
+//			else {
+//				System.out.println("Failed");
+//			}
+		}
+		catch(IOException err){
+			err.printStackTrace();
+		}
+		
 		// Poor mans banner
 		System.out.println("Hello World! I am a great calculator :-) ;-) ");
 
 		// creates an object of Scanner
 		Scanner input = new Scanner(System.in);
-		boolean a=true;
+		boolean a = true;
 		while (a) {
-			int sum = 0, subtract = 0, product = 0, divide = 0;
+			float result = 0;
 
 			System.out.println("Enter your operator");
 			String operator = input.next();
@@ -36,34 +56,48 @@ public class App {
 			System.out.print("Enter first number: ");
 
 			// takes 1st number
-			int firstNumber = input.nextInt();
+			float firstNumber = input.nextFloat();
 
 			// prints the name
-			System.out.println("Enter second number: ");
+			System.out.print("Enter second number: ");
 
 			// takes 2st number
-			int secondNumber = input.nextInt();
+			float secondNumber = input.nextFloat();
 
 			switch (operator) {
 			case "+":
-				sum = firstNumber + secondNumber;
-				System.out.printf("sum = %d\n", sum);
+				result = firstNumber + secondNumber;
+				System.out.printf("sum = %.2f\n", result);
 				break;
 			case "-":
-				subtract = firstNumber - secondNumber;
-				System.out.printf("substract = %d\n", subtract);
+				result = firstNumber - secondNumber;
+				System.out.printf("substract = %.2f\n", result);
 				break;
 			case "*":
-				product = firstNumber * secondNumber;
-				System.out.printf("product = %d\n", product);
+				result = firstNumber * secondNumber;
+				System.out.printf("product = %.2f\n", result);
 				break;
 			case "/":
-				divide = firstNumber / secondNumber;
-				System.out.printf("divide = %d\n", divide);
+				result = firstNumber / secondNumber;
+				System.out.printf("divide = %.2f\n", result);
 				break;
 			default:
 				System.out.println("Wrong Entry");
 				break;
+			}
+
+
+
+			String view = String.format("%s,%.2f,%.2f,%.2f\n", new Object[] { operator, firstNumber, secondNumber, result });
+			
+			try {
+				FileWriter filewriter = new FileWriter(fileName,true);
+				filewriter.write(view);
+				filewriter.close();
+				System.out.println("Success");
+			}
+			catch(IOException err) {
+				err.printStackTrace();
 			}
 			System.out.println("Do you want to continue (y/n)");
 			input.nextLine();
@@ -72,6 +106,7 @@ public class App {
 			System.out.println(a);
 		}
 		System.out.println("program terminated");
+		
 	}
 
 }
